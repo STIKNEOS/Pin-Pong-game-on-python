@@ -3,9 +3,9 @@ import pygame as pg
 WIN_X, WIN_Y = 800, 500
 WIN_X, WIN_Y = 600, 500
 FPS = 40
-GREEN = (50, 150, 50)
-BLUE = (50, 50, 150)
-RED = (150, 50, 50)
+WAVE = (0, 150, 150)
+BLUE = (0, 0, 150)
+RED = (150, 0, 0)
 class GameSprite(pg.sprite.Sprite):
     def __init__(self, color, x, y, speed, wight, height):
         super().__init__()
@@ -73,7 +73,7 @@ while run:
     for event in pg.event.get():
         if event.type == pg.QUIT:
             run = False
-    win.fill(GREEN)
+    win.fill(WAVE)
     racket1.update()
     racket2.update()
     racket1.reset(win)
