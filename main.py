@@ -8,6 +8,7 @@ win = pg.display.set_mode((WIN_X,WIN_Y))
 pg.display.set_caption("Pin-Pong")
 clock = pg.time.Clock()
 run = True
+
 while run:
     for event in pg.event.get():
         if event.type == pg.QUIT:
