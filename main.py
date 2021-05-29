@@ -6,6 +6,7 @@ FPS = 40
 WAVE = (0, 150, 150)
 BLUE = (0, 0, 150)
 RED = (150, 0, 0)
+
 class GameSprite(pg.sprite.Sprite):
     def __init__(self, color, x, y, speed, wight, height):
         super().__init__()
@@ -64,30 +65,37 @@ pg.display.set_caption("Ping-pong")
 #создания мяча и ракетки   
 racket2 = Player2(BLUE, 15, 200, 4, 25, 150) 
 racket1 = Player1(RED, WIN_X - 40, 200, 4, 25, 150)
-racket2 = Player2(BLUE, 15, 200, 4, 25, 150) 
 ball = Ball('ball.png', 200, 200, 4, 40, 40)
+
+pg.font.init()
+font = pg.font.Font(None, 35)
+lose1 = font.render('1-й игрок проиграл!', True, (180, 0, 0))
+lose2 = font.render('2-й игрок проиграл!', True, (180, 0, 0))
 
 clock = pg.time.Clock()
 run = True
+finish = False
 while run:
     for event in pg.event.get():
         if event.type == pg.QUIT:
             run = False
-    win.fill(WAVE)
-    racket1.update()
-    racket2.update()
-    racket1.reset(win)
-    racket2.reset(win)
-    ball.update()
-    ball.reset(win)
-    ball.collide_rocket(racket1)
-    ball.collide_rocket(racket2)
+    if not finish:
+        win.fill(WAVE)
+        racket1.update()
+        racket2.update()
+        racket1.reset(win)
+        racket2.reset(win)
+        ball.update()
+        ball.reset(win)
+        ball.collide_rocket(racket1)
+        ball.collide_rocket(racket2)
 
+        #если мяч улетел дальше ракетки, выводим условие проигрыша для первого игрока
         if ball.rect.x < 0:
             finish = True
             win.blit(lose1, (200, 200))
 
-        
+        #если мяч улетел дальше ракетки, выводим условие проигрыша для второго игрока
         if ball.rect.x > WIN_X - ball.rect.width:
             finish = True
             win.blit(lose2, (200, 200))
