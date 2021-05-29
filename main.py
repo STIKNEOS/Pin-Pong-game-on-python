@@ -82,5 +82,14 @@ while run:
     ball.reset(win)
     ball.collide_rocket(racket1)
     ball.collide_rocket(racket2)
+
+        if ball.rect.x < 0:
+            finish = True
+            win.blit(lose1, (200, 200))
+
+        
+        if ball.rect.x > WIN_X - ball.rect.width:
+            finish = True
+            win.blit(lose2, (200, 200))
     pg.display.update()
-    clock.tick(FPS) 
+    clock.tick(FPS)
